@@ -8,12 +8,22 @@ function App() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
 
+  const apiUrl = "http://localhost:3000/chat";
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   
+    // Send a request to the server with the prompt
+    axios
+      .post(apiUrl, { prompt })
+      .then((res) => {
+        // Update the response state with the server's response
+        setResponse(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
