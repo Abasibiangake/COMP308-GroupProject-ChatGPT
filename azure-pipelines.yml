@@ -29,5 +29,14 @@ stages:
         customCommand: 'run build'
         verbose: false
       displayName: 'Build project'
+    
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: 'groupreact-chatgpt'
+        customCommand: 'run test'
+        verbose: false
+      condition: succeededOrFailed()
+      displayName: 'Run tests'
 
 
