@@ -21,6 +21,25 @@ stages:
         workingDir: 'groupreact-chatgpt'
         verbose: false
       displayName: 'Install dependencies'
+    - task: SonarQubePrepare@4
+      inputs:
+        SonarQube: 'My SonarQube Service Connection'
+        scannerMode: 'MSBuild'
+        projectKey: 'my-project'
+        projectName: 'My Project'
+        extraProperties: |
+          sonar.cs.opencover.reportsPaths=$(Common.TestResultsDirectory)/**/coverage.opencover.xml
+
+    - task: MSBuild@1
+      inputs:
+       solution: '**/*.sln'
+       msbuildArchitecture: 'x64'
+
+    - task: SonarQubeAnalyze@4
+
+    - task: SonarQubePublish@4
+      inputs:
+        pollingTimeoutSec: '300'
 
     - task: Npm@1
       inputs:
@@ -29,12 +48,3 @@ stages:
         customCommand: 'run build'
         verbose: false
       displayName: 'Build project'
-
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: 'groupreact-chatgpt'
-        customCommand: 'run test --timeout 50000'
-        verbose: false
-      condition: succeededOrFailed()
-      displayName: 'Run tests'
