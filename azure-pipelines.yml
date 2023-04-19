@@ -18,25 +18,23 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-        workingDir: 'groupreact-chatgpt'
+        workingDir: '$(System.DefaultWorkingDirectory)'
         verbose: false
       displayName: 'Install dependencies'
 
     - task: Npm@1
       inputs:
         command: 'custom'
-        workingDir: 'groupreact-chatgpt'
+        workingDir: '$(System.DefaultWorkingDirectory)'
         customCommand: 'run build'
         verbose: false
       displayName: 'Build project'
-    
+
     - task: Npm@1
       inputs:
         command: 'custom'
-        workingDir: 'groupreact-chatgpt'
+        workingDir: '$(System.DefaultWorkingDirectory)'
         customCommand: 'run test'
         verbose: false
       condition: succeededOrFailed()
       displayName: 'Run tests'
-
-
