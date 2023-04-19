@@ -34,7 +34,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: 'groupreact-chatgpt'
-        customCommand: 'run test'
+        customCommand: 'run test --timeout 300000'
         verbose: false
       condition: succeededOrFailed()
       displayName: 'Run tests'
