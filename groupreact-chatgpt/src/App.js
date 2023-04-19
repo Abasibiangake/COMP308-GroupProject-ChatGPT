@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+
+import {useState} from 'react';
+
+import "./app-form.css"
 
 function App() {
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+   
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div class="container">
+          
+          <label>
+            Enter the prompt:
+            <textarea  className="input"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              rows={10}
+              cols={50}
+            />
+          </label>
+          <br />
+          <div className="container">
+            <button type="submit" className="submit-button">Submit</button>
+          </div>
+
+        </div>
+
+        <label>
+        Results:
+        < textarea className="textarea"
+          value = {response} wrap="hard"
+          rows={10}
+          cols={50}
+        />
+      </label>
+      </form>
+      
+     
     </div>
   );
 }
-
 export default App;
