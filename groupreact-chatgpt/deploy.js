@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-import env from 'react-dotenv'
+const env= require ('react-dotenv')
 const  azdev  = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
@@ -11,7 +11,7 @@ const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
 
 const run = async () => {
   try {
-    console.log('token is from', env.REACT_APP_TOKEN || env.TOKEN);
+    console.log('token is from', env.REACT_APP_TOKEN || env.TOKEN || window.env.TOKEN || window.env.REACT_APP_TOKEN || );
     // Get a connection to the Azure DevOps organization
     const credentialHandler = azdev.getPersonalAccessTokenHandler(process.env.REACT_APP_TOKEN ||process.env.TOKEN);
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
