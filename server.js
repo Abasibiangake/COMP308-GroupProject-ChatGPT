@@ -5,9 +5,10 @@ const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
 //
 // Set the 'OPENAI_API_KEY  ' variable
-process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY || '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';
+process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY || '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';
+//'';
 //
-//
+//https://beta.openai.com/account/api-keys
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY 
 });
