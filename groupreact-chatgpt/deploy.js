@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-import env from 'react-dotenv'
 const  azdev  = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
