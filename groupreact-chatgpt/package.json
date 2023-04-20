@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "deploy": "npm run build && node deploy.js"
+    "deploy": "react-dotenv && npm run build && node deploy.js"
   },
   "eslintConfig": {
     "extends": [
