@@ -1,17 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+import env from 'react-dotenv'
 const  azdev  = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
-const personalAccessToken = 'p7lnwrv2vsk6hxznvcgjgmon5kojkozn2lzufeyo3uhxhhpiiqxa';
+// const personalAccessToken = 'p7lnwrv2vsk6hxznvcgjgmon5kojkozn2lzufeyo3uhxhhpiiqxa';
 const artifactName = 'group-react-artifact';
 const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
 
 const run = async () => {
   try {
     // Get a connection to the Azure DevOps organization
-    const credentialHandler = azdev.getPersonalAccessTokenHandler(personalAccessToken);
+    const credentialHandler = azdev.getPersonalAccessTokenHandler(env.TOKEN);
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
    // const connection= await azdev.WebApi.createWithCredential(organizationUrl, credentialHandler);
 

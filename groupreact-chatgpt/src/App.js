@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
+import env from 'react-dotenv'
+
 
 import {useState} from 'react';
 
 import "./app-form.css"
 
 function App() {
+  window.alert(env.TOKEN)
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
 
