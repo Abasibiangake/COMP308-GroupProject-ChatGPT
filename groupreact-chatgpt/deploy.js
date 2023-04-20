@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { WebApi } = require('azure-devops-node-api');
-const { PersonalAccessTokenCredential } = require('azure-devops-node-api');
+const  azdev  = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
@@ -12,8 +11,8 @@ const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
 const run = async () => {
   try {
     // Get a connection to the Azure DevOps organization
-    const credentialHandler = new PersonalAccessTokenCredential(personalAccessToken);
-    const connection = new WebApi(organizationUrl, credentialHandler);
+    const credentialHandler = azdev.getPersonalAccessTokenHandler(personalAccessToken);
+    const connection= await azdev.WebApi.createWithCredential(organizationUrl, credentialHandler);
 
     // Get a reference to the Release API
     const releaseApi = await connection.getReleaseApi();
