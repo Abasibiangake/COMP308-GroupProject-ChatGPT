@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { WebApi } = require('azure-devops-node-api');
-const { PersonalAccessTokenCredential } = require('azure-devops-node-api/PersonalAccessTokenCredential');
+const { PersonalAccessTokenCredential } = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
