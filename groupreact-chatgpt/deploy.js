@@ -4,7 +4,7 @@ const  azdev  = require('azure-devops-node-api');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
-const personalAccessToken = 'btw2uiqnhalhga52tozq6sflnw7c3pkrhfm3uy6vekbjiafnamgq';
+const personalAccessToken = 'jfg4ixjj6xj6g577g2dffwcliz346k4toc2cinwunmckshrscaoq';
 const artifactName = 'group-react-artifact';
 const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
 
