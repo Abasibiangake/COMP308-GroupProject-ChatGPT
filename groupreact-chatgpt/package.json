@@ -15,12 +15,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-dotenv && react-scripts start",
-    "build": "react-dotenv && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "deploy": "react-dotenv && npm run build && node deploy.js"
+    "deploy": "npm run build && node deploy.js"
   },
   "eslintConfig": {
     "extends": [
