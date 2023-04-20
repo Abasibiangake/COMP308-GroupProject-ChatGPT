@@ -11,7 +11,7 @@ const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
 const run = async () => {
   try {
     // Get a connection to the Azure DevOps organization
-    const credentialHandler = azdev.getBasicHandler(new azdev.PersonalAccessTokenCredential(personalAccessToken));
+    const credentialHandler = azdev.getPersonalAccessTokenHandler(personalAccessToken);
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
    // const connection= await azdev.WebApi.createWithCredential(organizationUrl, credentialHandler);
 
