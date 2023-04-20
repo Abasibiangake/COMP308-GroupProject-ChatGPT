@@ -9,7 +9,7 @@ function App() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
 
-  const apiUrl = "http://localhost:3000/chat";
+  const apiUrl = "http://localhost:5000/chat";
 
 
   const handleSubmit = (e) => {
