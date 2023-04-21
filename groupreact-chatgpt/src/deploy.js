@@ -10,6 +10,7 @@ const artifactName = 'group-react-chatgpt';
 const artifactPath = tl.getVariable('Build.ArtifactStagingDirectory') + '/group-react-chatgpt.zip';
 
 const run = async () => {
+  console.log('from here');
   try {
     // Get a connection to the Azure DevOps organization
     const credentialHandler = azdev.getPersonalAccessTokenHandler(
