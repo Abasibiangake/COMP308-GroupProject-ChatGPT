@@ -100,7 +100,7 @@ stages:
       inputs:
         buildType: 'specific'
         project: '$(System.TeamProjectId)'
-        pipeline: '$(Build.DefinitionId)'
+        pipeline: 'group-react-releaseApi'
         buildVersionToDownload: 'latest'
         downloadType: 'single'
         artifactName: 'drop'
@@ -110,7 +110,7 @@ stages:
     - script: |
         unzip $(Pipeline.Workspace)/drop/group-react-chatgpt.zip -d $(Pipeline.Workspace)
       displayName: 'Extract Artifact'
-      
+
     - task: Npm@1
       inputs:
         command: 'custom'
