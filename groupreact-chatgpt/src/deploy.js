@@ -8,13 +8,12 @@ const projectName = 'Group-chatgpt';
 const token = tl.getVariable('TOKEN');
 const artifactName = 'group-react-artifact';
 const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
-console.log('token iscoming  from',token);
+console.log('token iscoming  from',token || process.env.TOKEN);
 const run = async () => {
   try {
     // Get a connection to the Azure DevOps organization
-    const credentialHandler = azdev.getPersonalAccessTokenHandler(token);
+    const credentialHandler = azdev.getPersonalAccessTokenHandler(token || process.env.TOKEN);
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
-   // const connection= await azdev.WebApi.createWithCredential(organizationUrl, credentialHandler);
 
     // Get a reference to the Release API
     const releaseApi = await connection.getReleaseApi();
