@@ -1,18 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 const  azdev  = require('azure-devops-node-api');
+const tl = require('azure-pipelines-task-lib/task');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
-
+const token = tl.getVariable('TOKEN');
 const artifactName = 'group-react-artifact';
 const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
-
+console.log('token iscoming  from',token);
 const run = async () => {
   try {
-    console.log('token is from', process.env.REACT_APP_TOKEN ||process.env.TOKEN );
     // Get a connection to the Azure DevOps organization
-    const credentialHandler = azdev.getPersonalAccessTokenHandler(process.env.REACT_APP_TOKEN ||process.env.TOKEN);
+    const credentialHandler = azdev.getPersonalAccessTokenHandler(token);
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
    // const connection= await azdev.WebApi.createWithCredential(organizationUrl, credentialHandler);
 
