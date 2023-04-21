@@ -1,5 +1,7 @@
 trigger:
-- main
+  branches:
+    exclude:
+      - '*'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -21,6 +23,7 @@ stages:
         workingDir: 'groupreact-chatgpt'
         verbose: false
       displayName: 'Install dependencies'
+      
     - task: Npm@1
       inputs:
         command: 'custom'
@@ -82,3 +85,34 @@ stages:
         customCommand: 'run deploy'
         verbose: false
       displayName: 'Deploy to Azure'
+
+- stage: Deploy_to_Dev
+  displayName: 'Deploy to Dev Environment'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Dev Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'specific'
+        project: '$(System.TeamProjectId)'
+        pipeline: '$(Build.DefinitionId)'
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(Pipeline.Workspace)'
+      displayName: 'Download Artifact'
+
+    - script: |
+        unzip $(Pipeline.Workspace)/drop/group-react-chatgpt.zip -d $(Pipeline.Workspace)
+      displayName: 'Extract Artifact'
+
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
+        customCommand: 'run deploy-dev
