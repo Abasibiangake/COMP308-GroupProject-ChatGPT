@@ -1,6 +1,6 @@
 
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 const azdev = require('azure-devops-node-api');
 const tl = require('azure-pipelines-task-lib/task');
 
