@@ -65,9 +65,18 @@ stages:
               verbose: false
             displayName: 'Build project'
 
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/drop/$(Build.BuildId).zip'
+              replaceExistingArchive: true
+            displayName: 'Create artifact'
+
           - task: PublishBuildArtifacts@1
             inputs:
-              pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              pathtoPublish: '$(Build.ArtifactStagingDirectory)/drop'
               artifactName: 'drop'
               publishLocation: 'Container'
             displayName: 'Publish artifact'
