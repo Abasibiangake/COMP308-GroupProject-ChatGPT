@@ -87,7 +87,7 @@ stages:
       displayName: 'Deploy to Azure'
 
 - stage: Deploy_to_Dev
-  displayName: 'Deploy to Dev Environment'
+  displayName: 'Mock Deploy to Dev Environment'
   dependsOn: Deliver
   condition: succeeded()
   jobs:
@@ -96,24 +96,5 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'specific'
-        project: '$(System.TeamProjectId)'
-        pipeline: 'group-react-releaseApi'
-        buildVersionToDownload: 'latest'
-        downloadType: 'single'
-        artifactName: 'drop'
-        downloadPath: '$(Pipeline.Workspace)'
-      displayName: 'Download Artifact'
-
-    - script: |
-        unzip $(Pipeline.Workspace)/drop/group-react-chatgpt.zip -d $(Pipeline.Workspace)
-      displayName: 'Extract Artifact'
-
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
-        customCommand: 'run deploy-dev'
-      displayName: 'Deploy to Dev Environment'
+    - script: echo 'Mock Deploy to Dev Environment'
+      displayName: 'Mock Deployment'
