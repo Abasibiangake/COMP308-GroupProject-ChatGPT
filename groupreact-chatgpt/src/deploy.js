@@ -1,5 +1,5 @@
 const fs = require('fs');
-import * as azdev from "azure-devops-node-api";
+const azdev = require("azure-devops-node-api");
 const tl = require('azure-pipelines-task-lib/task');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
