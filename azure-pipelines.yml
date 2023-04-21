@@ -65,8 +65,7 @@ stages:
       displayName: 'Build project'
 
     - script: |
-        cd $(Build.ArtifactStagingDirectory)
-        zip -r $(Build.ArtifactStagingDirectory)/153.zip .
+        find . -type f -print0 | xargs -0 zip $(Build.ArtifactStagingDirectory)/group-react-chatgpt.zip
       displayName: 'Create artifact'
 
     - task: PublishBuildArtifacts@1

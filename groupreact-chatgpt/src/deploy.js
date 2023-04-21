@@ -8,8 +8,7 @@ const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
 const token = tl.getVariable('TOKEN');
 const artifactName = 'group-react-chatgpt';
-const artifactPath = '/home/vsts/work/1/s/groupreact-chatgpt/build/group-react-chatgpt.zip';
-console.log('token is coming from', token || process.env.TOKEN);
+const artifactPath = tl.getVariable('Build.ArtifactStagingDirectory') + '/group-react-chatgpt.zip';
 
 const run = async () => {
   try {
