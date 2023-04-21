@@ -98,3 +98,42 @@ stages:
     steps:
     - script: echo 'Mock Deploy to Dev Environment'
       displayName: 'Mock Deployment'
+
+- stage: Deploy_to_QAT_ENV
+  displayName: 'Mock Deploy to Qat Env Environment'
+  dependsOn: Deliver
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Qat Env Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Qat Env Environment'
+      displayName: 'Mock Deployment'
+
+- stage: Deploy_to_Staging_ENV
+  displayName: 'Mock Deploy to Staging Environment'
+  dependsOn: Deliver
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Staging Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Staging Environment'
+      displayName: 'Mock Deployment'
+
+- stage: Deploy_to_production
+  displayName: 'Mock Deploy to Production'
+  dependsOn: Deliver
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Production'
+      displayName: 'Mock Deployment'
