@@ -1,81 +1,81 @@
 trigger:
-- main
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  jobs:
-  - job: Build_and_Test
-    displayName: 'Build and Test'
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '16.x'
-      displayName: 'Install Node.js'
+  - stage: Build
+    jobs:
+      - job: Build_and_Test
+        displayName: 'Build and Test'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '16.x'
+            displayName: 'Install Node.js'
 
-    - task: Npm@1
-      inputs:
-        command: 'install'
-        workingDir: 'groupreact-chatgpt'
-        verbose: false
-      displayName: 'Install dependencies'
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: 'groupreact-chatgpt'
-        customCommand: 'run lint'
-        verbose: false
-      displayName: 'Run ESLint'
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: 'groupreact-chatgpt'
+              verbose: false
+            displayName: 'Install dependencies'
 
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: 'groupreact-chatgpt'
-        customCommand: 'run build'
-        verbose: false
-      displayName: 'Build project'
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              workingDir: 'groupreact-chatgpt'
+              customCommand: 'run lint'
+              verbose: false
+            displayName: 'Run ESLint'
 
-- stage: Deliver
-  jobs:
-  - job: Release
-    displayName: 'Release to Azure'
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '16.x'
-      displayName: 'Install Node.js'
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              workingDir: 'groupreact-chatgpt'
+              customCommand: 'run build'
+              verbose: false
+            displayName: 'Build project'
 
-    - task: Npm@1
-      inputs:
-        command: 'install'
-        workingDir: 'groupreact-chatgpt'
-        verbose: false
-      displayName: 'Install dependencies'
+  - stage: Deliver
+    jobs:
+      - job: Release
+        displayName: 'Release to Azure'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '16.x'
+            displayName: 'Install Node.js'
 
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: 'groupreact-chatgpt'
-        customCommand: 'run build'
-        verbose: false
-      displayName: 'Build project'
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: 'groupreact-chatgpt'
+              verbose: false
+            displayName: 'Install dependencies'
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: 'drop'
-        publishLocation: 'Container'
-      displayName: 'Publish artifact'
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              workingDir: 'groupreact-chatgpt'
+              customCommand: 'run build'
+              verbose: false
+            displayName: 'Build project'
 
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: 'groupreact-chatgpt'
-        customCommand: 'run deploy'
-        verbose: false
-      displayName: 'Deploy to Azure'
-    
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              artifactName: 'drop'
+              publishLocation: 'Container'
+            displayName: 'Publish artifact'
+
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              workingDir: 'groupreact-chatgpt'
+              customCommand: 'run deploy'
+              verbose: false
+            displayName: 'Deploy to Azure'

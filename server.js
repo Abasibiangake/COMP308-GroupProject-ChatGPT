@@ -1,8 +1,15 @@
 const express = require("express");
+require('dotenv').config()
 const cors = require("cors");
 const bodyParser = require("body-parser");
 //
 const { Configuration, OpenAIApi } = require("openai");
+
+// Set up the server
+const app = express();
+
+app.use(bodyParser.json());
+app.use(cors())
 //
 // Set the 'OPENAI_API_KEY  ' variable
 process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY || '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';
@@ -13,10 +20,7 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY 
 });
 const openai = new OpenAIApi(configuration);
-// Set up the server
-const app = express();
-app.use(bodyParser.json());
-app.use(cors())
+
 
 // Set up the ChatGPT endpoint
 app.post("/chat", async (req, res) => {
