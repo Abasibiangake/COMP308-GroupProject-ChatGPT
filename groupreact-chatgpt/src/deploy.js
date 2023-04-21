@@ -1,7 +1,8 @@
 
 const fs = require('fs');
 // const path = require('path');
-const azdev = require('azure-devops-node-api');
+import * as azdev from "azure-devops-node-api";
+import * as ba from "azure-devops-node-api/BuildApi";
 const tl = require('azure-pipelines-task-lib/task');
 
 const organizationUrl = 'https://dev.azure.com/ajames87';
@@ -19,7 +20,7 @@ const run = async () => {
     const connection = new azdev.WebApi(organizationUrl, credentialHandler);
 
     // Get a reference to the Build API
-    const buildApi = await connection.getBuildApi();
+    let build: ba.IBuildApi = await connection.getBuildApi();
 
     if (!fs.existsSync(artifactPath)) {
       console.error(`Artifact path not found: ${artifactPath}`);
