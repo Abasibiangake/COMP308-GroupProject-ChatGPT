@@ -116,3 +116,4 @@ stages:
         command: 'custom'
         workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
         customCommand: 'run deploy-dev'
+      displayName: 'Deploy to Dev Environment'
