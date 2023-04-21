@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const path = require('path');
 const azdev = require('azure-devops-node-api');
@@ -6,8 +7,8 @@ const tl = require('azure-pipelines-task-lib/task');
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
 const token = tl.getVariable('TOKEN');
-const artifactName = 'group-react-artifact';
-const artifactPath = path.join(__dirname, 'build', `${artifactName}.zip`);
+const artifactName = 'Group-chatgpt';
+const artifactPath = '/home/vsts/work/1/s/groupreact-chatgpt/build/group-react-artifact.zip';
 console.log('token is coming from', token || process.env.TOKEN);
 
 const run = async () => {
@@ -59,7 +60,6 @@ const run = async () => {
 };
 
 run();
-
 
 // const fs = require('fs');
 // const path = require('path');
