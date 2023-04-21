@@ -88,7 +88,7 @@ stages:
 
 - stage: Deploy_to_Dev
   displayName: 'Deploy to Dev Environment'
-  dependsOn: Build
+  dependsOn: Deliver
   condition: succeeded()
   jobs:
   - job: Deploy
@@ -96,23 +96,44 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'specific'
-        project: '$(System.TeamProjectId)'
-        pipeline: '$(Build.DefinitionId)'
-        buildVersionToDownload: 'latest'
-        downloadType: 'single'
-        artifactName: 'drop'
-        downloadPath: '$(Pipeline.Workspace)'
-      displayName: 'Download Artifact'
+    - script: echo 'Mock Deploy to Dev Environment'
+      displayName: 'Mock Deployment'
 
-    - script: |
-        unzip $(Pipeline.Workspace)/drop/group-react-chatgpt.zip -d $(Pipeline.Workspace)
-      displayName: 'Extract Artifact'
+- stage: Deploy_to_QAT_ENV
+  displayName: 'Deploy to Qat Env Environment'
+  dependsOn: Deploy_to_Dev
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Qat Env Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Qat Env Environment'
+      displayName: 'Mock Deployment'
 
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
-        customCommand: 'run deploy-dev
+- stage: Deploy_to_Staging_ENV
+  displayName: 'Deploy to Staging Environment'
+  dependsOn: Deploy_to_QAT_ENV
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Staging Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Staging Environment'
+      displayName: 'Mock Deployment'
+
+- stage: Deploy_to_production
+  displayName: 'Deploy to Production'
+  dependsOn: Deploy_to_Staging_ENV
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo 'Mock Deploy to Production'
+      displayName: 'Mock Deployment'
