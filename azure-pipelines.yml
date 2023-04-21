@@ -88,12 +88,32 @@ stages:
 
 - stage: Deploy_to_Dev
   displayName: 'Deploy to Dev Environment'
-  dependsOn: Build
+  dependsOn: Deliver
   condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Artifact to Dev Environment'
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
-    - script: echo 'Deploying to Env Stage...'
-      displayName: 'Deploy to Env Stage'
-      
-    - script: echo 'Deployment successful!'
-      displayName: 'Deployment Success'
- 
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'specific'
+        project: '$(System.TeamProjectId)'
+        pipeline: 'group-react-releaseApi'
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(Pipeline.Workspace)'
+      displayName: 'Download Artifact'
+
+    - script: |
+        unzip $(Pipeline.Workspace)/drop/group-react-chatgpt.zip -d $(Pipeline.Workspace)
+      displayName: 'Extract Artifact'
+
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
+        customCommand: 'run deploy-dev'
+      displayName: 'Deploy to Dev Environment'
