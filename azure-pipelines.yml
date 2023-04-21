@@ -87,7 +87,7 @@ stages:
       displayName: 'Deploy to Azure'
 
 - stage: Deploy_to_Dev
-  displayName: 'Mock Deploy to Dev Environment'
+  displayName: 'Deploy to Dev Environment'
   dependsOn: Deliver
   condition: succeeded()
   jobs:
@@ -100,7 +100,7 @@ stages:
       displayName: 'Mock Deployment'
 
 - stage: Deploy_to_QAT_ENV
-  displayName: 'Mock Deploy to Qat Env Environment'
+  displayName: 'Deploy to Qat Env Environment'
   dependsOn: Deliver
   condition: succeeded()
   jobs:
@@ -113,7 +113,7 @@ stages:
       displayName: 'Mock Deployment'
 
 - stage: Deploy_to_Staging_ENV
-  displayName: 'Mock Deploy to Staging Environment'
+  displayName: 'Deploy to Staging Environment'
   dependsOn: Deliver
   condition: succeeded()
   jobs:
@@ -126,7 +126,7 @@ stages:
       displayName: 'Mock Deployment'
 
 - stage: Deploy_to_production
-  displayName: 'Mock Deploy to Production'
+  displayName: 'Deploy to Production'
   dependsOn: Deliver
   condition: succeeded()
   jobs:
