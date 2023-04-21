@@ -115,4 +115,4 @@ stages:
       inputs:
         command: 'custom'
         workingDir: '$(Pipeline.Workspace)/groupreact-chatgpt'
-        customCommand: 'run deploy-dev
+        customCommand: 'run deploy-dev'
