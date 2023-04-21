@@ -22,7 +22,7 @@ const run = async () => {
     const artifactStream = fs.createReadStream(artifactPath);
 
     // Upload the artifact to Azure DevOps
-    const uploadedArtifact = await releaseApi.createArtifact(
+    const uploadedArtifact = await releaseApi.createArtifactAsync(
       artifactName,
       projectName,
       artifactStream
