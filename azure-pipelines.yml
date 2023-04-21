@@ -101,7 +101,7 @@ stages:
 
 - stage: Deploy_to_QAT_ENV
   displayName: 'Deploy to Qat Env Environment'
-  dependsOn: Deliver
+  dependsOn: Deploy_to_Dev
   condition: succeeded()
   jobs:
   - job: Deploy
@@ -114,7 +114,7 @@ stages:
 
 - stage: Deploy_to_Staging_ENV
   displayName: 'Deploy to Staging Environment'
-  dependsOn: Deliver
+  dependsOn: Deploy_to_QAT_ENV
   condition: succeeded()
   jobs:
   - job: Deploy
@@ -127,7 +127,7 @@ stages:
 
 - stage: Deploy_to_production
   displayName: 'Deploy to Production'
-  dependsOn: Deliver
+  dependsOn: Deploy_to_Staging_ENV
   condition: succeeded()
   jobs:
   - job: Deploy
