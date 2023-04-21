@@ -41,7 +41,7 @@ const run = async () => {
 
     // Create a new release
     const release = {
-      definitionId: 'group-react-releaseApi',
+      definitionId: 12,
       description: 'New release created by Azure DevOps pipeline',
       artifacts: [
         {
