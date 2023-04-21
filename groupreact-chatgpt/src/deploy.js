@@ -53,7 +53,13 @@ const run = async () => {
     };
     const createdRelease = await releaseApi.createRelease(release, projectName);
 
-    console.log('Release created successfully', createdRelease);
+    if (createdRelease && createdRelease.id) {
+      console.log(`Release created successfully with ID: ${createdRelease.id}`);
+    } else {
+      console.error('Failed to create release');
+      process.exit(1);
+    }
+
   } catch (err) {
     console.error('Failed to create release', err);
     process.exit(1);
@@ -61,3 +67,10 @@ const run = async () => {
 };
 
 run();
+
+
+
+
+
+
+
