@@ -27,15 +27,16 @@ const run = async () => {
     // Read the artifact ZIP file from disk
     const artifactStream = fs.createReadStream(artifactPath);
 
-    // Create a new artifact
-    await build.createArtifact(
-      projectName,
-      artifactName,
-      artifactPath,
-      fs.statSync(artifactPath).size,
-      'build'
-    );
-
+     // Create a new artifact
+     const artifactMetadata = {
+      artifactType: 'Container',
+      artifactProvider: 'FilePath',
+      artifactData: {
+        zipPath: artifactPath,
+        artifactName: artifactName
+      }
+    };
+    await build.createArtifact(projectName, artifactMetadata, artifactStream);
     // Get a reference to the Release API
     const releaseApi = await connection.getReleaseApi();
 
