@@ -25,8 +25,8 @@ const run = async () => {
     // Read the artifact ZIP file from disk
     const artifactStream = fs.createReadStream(artifactPath);
 
-     // Create a new artifact
-     const artifactMetadata = {
+    // Create a new artifact
+    const artifactMetadata = {
       artifactType: 'Container',
       artifactProvider: 'FilePath',
       artifactData: {
@@ -35,6 +35,7 @@ const run = async () => {
       }
     };
     await build.createArtifact(projectName, artifactMetadata, artifactStream);
+
     // Get a reference to the Release API
     const releaseApi = await connection.getReleaseApi();
 
@@ -53,7 +54,8 @@ const run = async () => {
     };
     const createdRelease = await releaseApi.createRelease(release, projectName);
 
-    if (createdRelease && createdRelease.id) {
+    if (createdRelease) {
+      console.log('created release', createdRelease);
       console.log(`Release created successfully with ID: ${createdRelease.id}`);
     } else {
       console.error('Failed to create release');
@@ -67,10 +69,3 @@ const run = async () => {
 };
 
 run();
-
-
-
-
-
-
-
