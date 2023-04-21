@@ -1,7 +1,6 @@
 const fs = require('fs');
 const azdev = require("azure-devops-node-api");
 const tl = require('azure-pipelines-task-lib/task');
-
 const organizationUrl = 'https://dev.azure.com/ajames87';
 const projectName = 'Group-chatgpt';
 const token = tl.getVariable('TOKEN');
